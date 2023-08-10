@@ -4,30 +4,12 @@ import boto3
 import json
 import psycopg2
 from doc_chat_common import get_secret
+from doc_chat_common import get_collections
+from doc_chat_common import get_collection_files
+
 
 s3 = boto3.resource('s3')
 my_bucket = s3.Bucket('bfs-chat')
-
-def get_collections():
-    collections = []
-    files = []
-    for obj in my_bucket.objects.all():
-        files.append(obj.key)
-        if '/' in obj.key:
-            collections.append(obj.key.split('/')[0])
-    collections = list(set(collections))
-    collections.sort()
-    return collections
-
-def get_collection_files(collection):
-    collection_path = collection + '/'
-    files = []
-    for obj in my_bucket.objects.all():
-        if collection_path in obj.key and collection_path != obj.key:
-            files.append(obj.key)
-    files = list(set(files))
-    files.sort()
-    return files
 
 def delete_files_s3(files, checkbox):
     for file in files:

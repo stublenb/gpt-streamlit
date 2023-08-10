@@ -16,6 +16,16 @@ def get_collections():
     collections.sort()
     return collections
 
+def get_collection_files(collection):
+    collection_path = collection + '/'
+    files = []
+    for obj in my_bucket.objects.all():
+        if collection_path in obj.key and collection_path != obj.key:
+            files.append(obj.key)
+    files = list(set(files))
+    files.sort()
+    return files
+
 def get_secret(secret_name, region_name):
     # Create a Secrets Manager client
     session = boto3.session.Session()
