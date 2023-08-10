@@ -1,5 +1,6 @@
 import json
 import boto3
+import os
 
 s3 = boto3.resource('s3')
 my_bucket = s3.Bucket('bfs-chat')
@@ -36,3 +37,5 @@ def get_secret(secret_name, region_name):
     secret = json.loads(get_secret_value_response['SecretString'])
 
     return secret
+def set_api_key():
+    os.environ["OPENAI_API_KEY"] = get_secret('OPENAI_API_KEY', 'us-east-1')['OPENAI_API_KEY']

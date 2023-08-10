@@ -5,6 +5,8 @@ import json
 from query_data import chain_options
 import doc_chat_common
 
+doc_chat_common.set_api_key()
+
 collection = st.sidebar.selectbox(
     'What collection would you like to chat with?',
     doc_chat_common.get_collections())
