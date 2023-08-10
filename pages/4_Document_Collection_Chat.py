@@ -3,11 +3,11 @@ import streamlit as st
 import boto3
 import json
 from query_data import chain_options
-import my_funcs
+import doc_chat_common
 
 collection = st.sidebar.selectbox(
     'What collection would you like to chat with?',
-    my_funcs.get_collections())
+    doc_chat_common.get_collections())
 
 #st.title("Chatbot")
 model = st.sidebar.selectbox(
