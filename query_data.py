@@ -41,7 +41,7 @@ def load_retriever(collection):
 #        vectorstore = pickle.load(f)
 #    retriever = VectorStoreRetriever(vectorstore=vectorstore)
 
-    CONNECTION_STRING = 'postgresql://' + pg['username'] + ':' + pg['password'] + '@' + pg['host'] + ':' + pg['port'] + '/postgres'
+    CONNECTION_STRING = 'postgresql://' + pg['username'] + ':' + pg['password'] + '@' + pg['host'] + ':' +  str(pg['port']) + '/postgres'
     embeddings = OpenAIEmbeddings()
 
     store = PGVector(
