@@ -3,32 +3,10 @@ import pandas as pd
 import boto3
 import json
 import psycopg2
+from doc_chat_common import get_secret
 
 s3 = boto3.resource('s3')
 my_bucket = s3.Bucket('bfs-chat')
-
-
-def get_secret(secret_name, region_name):
-    # Create a Secrets Manager client
-    session = boto3.session.Session()
-    client = session.client(
-        service_name='secretsmanager',
-        region_name=region_name
-    )
-
-    try:
-        get_secret_value_response = client.get_secret_value(
-            SecretId=secret_name
-        )
-    except ClientError as e:
-        # For a list of exceptions thrown, see
-        # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
-        raise e
-
-    # Decrypts secret using the associated KMS key.
-    secret = json.loads(get_secret_value_response['SecretString'])
-
-    return secret
 
 def get_collections():
     collections = []
