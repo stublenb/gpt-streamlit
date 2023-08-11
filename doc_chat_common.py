@@ -7,6 +7,7 @@ s3 = boto3.resource('s3')
 my_bucket = s3.Bucket('bfs-chat')
 
 def get_openai_models():
+    set_api_key()
     models = []
     openai_models = openai.Model.list()
     for model in openai_models['data']:
