@@ -11,6 +11,11 @@ collection = st.sidebar.selectbox(
     'What collection would you like to chat with?',
     doc_chat_common.get_collections())
 
+llm = st.sidebar.selectbox(
+    'What LLM would you like to use?',
+    doc_chat_common.get_openai_models()
+)
+
 #st.title("Chatbot")
 model = st.sidebar.selectbox(
     'Which QA model would you like to work with?',
