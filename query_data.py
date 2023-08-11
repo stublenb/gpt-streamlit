@@ -54,8 +54,8 @@ def load_retriever(collection):
 
 
 def get_basic_qa_chain(collection):
-    # llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
-    llm = ChatOpenAI(model_name="gpt-4", temperature=0)
+    llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
+    # llm = ChatOpenAI(model_name="gpt-4", temperature=0)
     retriever = load_retriever(collection)
     memory = ConversationBufferMemory(
         memory_key="chat_history", return_messages=True)
@@ -67,8 +67,8 @@ def get_basic_qa_chain(collection):
 
 
 def get_custom_prompt_qa_chain(collection):
-    # llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
-    llm = ChatOpenAI(model_name="gpt-4", temperature=0)
+    llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
+    # llm = ChatOpenAI(model_name="gpt-4", temperature=0)
     retriever = load_retriever(collection)
     memory = ConversationBufferMemory(
         memory_key="chat_history", return_messages=True)
@@ -83,8 +83,8 @@ def get_custom_prompt_qa_chain(collection):
 
 
 def get_condense_prompt_qa_chain(collection):
-    # llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
-    llm = ChatOpenAI(model_name="gpt-4", temperature=0)
+    llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
+    # llm = ChatOpenAI(model_name="gpt-4", temperature=0)
     retriever = load_retriever(collection)
     memory = ConversationBufferMemory(
         memory_key="chat_history", return_messages=True)
