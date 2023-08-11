@@ -16,6 +16,7 @@ collection = st.sidebar.selectbox(
 #     doc_chat_common.get_openai_models()
 # )
 
+
 #st.title("Chatbot")
 model = st.sidebar.selectbox(
     'Which QA model would you like to work with?',
