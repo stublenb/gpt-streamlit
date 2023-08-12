@@ -25,7 +25,7 @@ model = st.sidebar.selectbox(
     list(chain_options.keys())
 )
 
-chain = chain_options[model](collection, llm)
+chain = chain_options[model](collection, llm, temperature)
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
