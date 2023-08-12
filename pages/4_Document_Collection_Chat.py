@@ -22,8 +22,17 @@ model = st.sidebar.selectbox(
     'Which QA model would you like to work with?',
     list(chain_options.keys())
 )
+
+
+temperature = st.sidebar.slider(
+    'Set temperature for model',
+    0.0, 1.0, 1.0, 0.1)
+st.write('Values:', values)
+
+
 chain = chain_options[model](collection, llm)
 st.write('You selected:', model)
+
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
