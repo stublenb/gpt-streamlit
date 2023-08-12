@@ -12,10 +12,10 @@ collection = st.sidebar.selectbox(
     'What collection would you like to chat with?',
     doc_chat_common.get_collections())
 
-# llm = st.sidebar.selectbox(
-#     'What LLM would you like to use?',
-#     doc_chat_common.get_openai_models()
-# )
+llm = st.sidebar.selectbox(
+    'What LLM would you like to use?',
+    doc_chat_common.get_openai_models()
+)
 
 for name, value in os.environ.items():
     st.write("{0}: {1}".format(name, value))
