@@ -4,6 +4,7 @@ import boto3
 import json
 from query_data import chain_options
 import doc_chat_common
+import os
 
 doc_chat_common.set_api_key()
 
@@ -16,6 +17,8 @@ collection = st.sidebar.selectbox(
 #     doc_chat_common.get_openai_models()
 # )
 
+for name, value in os.environ.items():
+    st.write("{0}: {1}".format(name, value))
 
 #st.title("Chatbot")
 model = st.sidebar.selectbox(
