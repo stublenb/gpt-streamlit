@@ -30,9 +30,10 @@ def get_secret(secret_name, region_name):
 
 def set_api_key():
     os.environ["OPENAI_API_KEY"] = get_secret('OPENAI_API_KEY', 'us-east-1')['OPENAI_API_KEY']
+    openai.api_key = get_secret('OPENAI_API_KEY', 'us-east-1')['OPENAI_API_KEY']
 
 def get_openai_models():
-    # set_api_key()
+    set_api_key()
     models = []
     openai_models = openai.Model.list()
     for model in openai_models['data']:
