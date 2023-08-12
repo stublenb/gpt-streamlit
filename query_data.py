@@ -53,8 +53,8 @@ def load_retriever(collection):
     return retriever
 
 
-def get_basic_qa_chain(collection):
-    llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
+def get_basic_qa_chain(collection, llm):
+    llm = ChatOpenAI(model_name=llm, temperature=0) #model_name="gpt-3.5-turbo", temperature=0)
     # llm = ChatOpenAI(model_name="gpt-4", temperature=0)
     retriever = load_retriever(collection)
     memory = ConversationBufferMemory(

@@ -17,15 +17,12 @@ llm = st.sidebar.selectbox(
     doc_chat_common.get_openai_models()
 )
 
-for name, value in os.environ.items():
-    st.write("{0}: {1}".format(name, value))
-
 #st.title("Chatbot")
 model = st.sidebar.selectbox(
     'Which QA model would you like to work with?',
     list(chain_options.keys())
 )
-chain = chain_options[model](collection)
+chain = chain_options[model](collection, llm)
 st.write('You selected:', model)
 
 if "messages" not in st.session_state:
