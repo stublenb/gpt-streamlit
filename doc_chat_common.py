@@ -37,8 +37,8 @@ def get_openai_models():
     models = []
     openai_models = openai.Model.list()
     for model in openai_models['data']:
-        # if model['root'].startswith('gpt'):
-        models.append(model['root'])
+        if model['root'].startswith('gpt'):
+            models.append(model['root'])
     models.sort()
     return models
 
