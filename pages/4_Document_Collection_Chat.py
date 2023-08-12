@@ -28,7 +28,7 @@ model = st.sidebar.selectbox(
 def reset_conversation():
   st.session_state.conversation = None
   st.session_state.chat_history = None
-  st.session_state.messages = None
+  st.session_state.messages = []
 st.sidebar.button('Reset Chat', on_click=reset_conversation)
 
 chain = chain_options[model](collection, llm, temperature)
