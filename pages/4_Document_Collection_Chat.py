@@ -16,17 +16,14 @@ llm = st.sidebar.selectbox(
     'What LLM would you like to use?',
     doc_chat_common.get_openai_models()
 )
+temperature = st.sidebar.slider(
+    'Set temperature for model',
+    0.0, 1.0, 1.0, 0.1)
 
-#st.title("Chatbot")
 model = st.sidebar.selectbox(
     'Which QA model would you like to work with?',
     list(chain_options.keys())
 )
-
-
-temperature = st.sidebar.slider(
-    'Set temperature for model',
-    0.0, 1.0, 1.0, 0.1)
 
 chain = chain_options[model](collection, llm)
 
