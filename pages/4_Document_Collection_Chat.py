@@ -25,6 +25,11 @@ model = st.sidebar.selectbox(
     list(chain_options.keys())
 )
 
+def reset_conversation():
+  st.session_state.conversation = None
+  st.session_state.chat_history = None
+st.sidebar.button('Reset Chat', on_click=reset_conversation)
+
 chain = chain_options[model](collection, llm, temperature)
 
 if "messages" not in st.session_state:
