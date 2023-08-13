@@ -17,7 +17,7 @@ llm = st.sidebar.selectbox(
     'What LLM would you like to use?',
     doc_chat_common.get_openai_models()
 )
-temperature = st.sidebar.slider(
+temperature =  st.sidebar.slider(
     'Set temperature for model',
     0.0, 1.0, 1.0, 0.05)
 
@@ -33,7 +33,7 @@ template = st.sidebar.text_area('Prompt Template', value = template)
 #   st.session_state.messages = []
 # st.sidebar.button('Reset Chat', on_click=reset_conversation)
 
-chain = chain_options[model](collection, llm, temperature, template)
+chain = chain_options[model](collection, llm, temperature) #, template)
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
