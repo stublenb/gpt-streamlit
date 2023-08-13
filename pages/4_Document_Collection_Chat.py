@@ -26,7 +26,7 @@ model = st.sidebar.selectbox(
     list(chain_options.keys())
 )
 
-template = st.sidebar.text_input(value = template)
+template = st.sidebar.text_input('Prompt Template', value = template)
 # def reset_conversation():
 #   st.session_state.conversation = None
 #   st.session_state.chat_history = None
