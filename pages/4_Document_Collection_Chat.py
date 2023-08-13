@@ -3,6 +3,7 @@ import streamlit as st
 import boto3
 import json
 from query_data import chain_options
+from query_data import template
 import doc_chat_common
 import os
 
