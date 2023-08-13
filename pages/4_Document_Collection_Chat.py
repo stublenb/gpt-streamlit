@@ -18,7 +18,7 @@ llm = st.sidebar.selectbox(
 )
 temperature = st.sidebar.slider(
     'Set temperature for model',
-    0.0, 1.0, 1.0, 0.1)
+    0.0, 1.0, 1.0, 0.05)
 
 model = st.sidebar.selectbox(
     'Which QA model would you like to work with?',
