@@ -25,6 +25,7 @@ model = st.sidebar.selectbox(
     list(chain_options.keys())
 )
 
+st.write(template)
 # def reset_conversation():
 #   st.session_state.conversation = None
 #   st.session_state.chat_history = None

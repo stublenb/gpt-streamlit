@@ -37,15 +37,11 @@ QA_PROMPT = PromptTemplate(template=template, input_variables=[
 pg = get_secret('postgres-vector', 'us-east-1')
 
 def load_retriever(collection):
-#    with open("vectorstore.pkl", "rb") as f:
-#        vectorstore = pickle.load(f)
-#    retriever = VectorStoreRetriever(vectorstore=vectorstore)
-
     CONNECTION_STRING = 'postgresql://' + pg['username'] + ':' + pg['password'] + '@' + pg['host'] + ':' +  str(pg['port']) + '/postgres'
     embeddings = OpenAIEmbeddings()
 
     store = PGVector(
-        collection_name=collection, #'Licenses',
+        collection_name=collection,
         connection_string=CONNECTION_STRING,
         embedding_function=OpenAIEmbeddings()
     )
@@ -54,8 +50,7 @@ def load_retriever(collection):
 
 
 def get_basic_qa_chain(collection, llm, temperature):
-    llm = ChatOpenAI(model_name=llm, temperature=temperature) #model_name="gpt-3.5-turbo", temperature=0)
-    # llm = ChatOpenAI(model_name="gpt-4", temperature=0)
+    llm = ChatOpenAI(model_name=llm, temperature=temperature)
     retriever = load_retriever(collection)
     memory = ConversationBufferMemory(
         memory_key="chat_history", return_messages=True)
@@ -68,12 +63,9 @@ def get_basic_qa_chain(collection, llm, temperature):
 
 def get_custom_prompt_qa_chain(collection):
     llm = ChatOpenAI(model_name=llm, temperature=temperature)
-    # llm = ChatOpenAI(model_name="gpt-4", temperature=0)
     retriever = load_retriever(collection)
     memory = ConversationBufferMemory(
         memory_key="chat_history", return_messages=True)
-    # see: https://github.com/langchain-ai/langchain/issues/6635
-    # see: https://github.com/langchain-ai/langchain/issues/1497
     model = ConversationalRetrievalChain.from_llm(
         llm=llm,
         retriever=retriever,
@@ -84,11 +76,9 @@ def get_custom_prompt_qa_chain(collection):
 
 def get_condense_prompt_qa_chain(collection):
     llm = ChatOpenAI(model_name=llm, temperature=temperature)
-    # llm = ChatOpenAI(model_name="gpt-4", temperature=0)
     retriever = load_retriever(collection)
     memory = ConversationBufferMemory(
         memory_key="chat_history", return_messages=True)
-    # see: https://github.com/langchain-ai/langchain/issues/5890
     model = ConversationalRetrievalChain.from_llm(
         llm=llm,
         retriever=retriever,
@@ -99,7 +89,6 @@ def get_condense_prompt_qa_chain(collection):
 
 
 def get_qa_with_sources_chain(collection):
-    # llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
     llm = ChatOpenAI(model_name=llm, temperature=temperature)
     retriever = load_retriever(collection)
     history = []
