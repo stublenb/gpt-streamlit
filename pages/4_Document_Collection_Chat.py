@@ -18,8 +18,8 @@ llm = st.sidebar.selectbox(
     doc_chat_common.get_openai_models()
 )
 temperature =  st.sidebar.slider(
-    'Set temperature for model',
-    0.0, 1.0, 1.0, 0.05)
+    'Set temperature for model (0 = Strict, 1 = More Creative)',
+    0.0, 1.0, 0.0, 0.05)
 
 model = st.sidebar.selectbox(
     'Which QA model would you like to work with?',
