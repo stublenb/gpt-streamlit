@@ -20,21 +20,22 @@ option = st.selectbox(
     collections)
 
 if option != '<Create New Collection>':
-    uploaded_file = st.file_uploader("Choose a file")
-    if uploaded_file is not None:
-        bytes_data = uploaded_file.read()
-        if st.button('Upload File'):
-            if uploaded_file is None:
-                st.write('No File Selected')
-            else:
-                #st.write('Uploading File')
-                s3 = boto3.resource('s3')
-                key_path = option + '/' + uploaded_file.name
-                if key_path not in files:
-                    s3.Bucket('bfs-chat').put_object(Key=key_path, Body=bytes_data)
-                    st.write(key_path, ' Uploaded')
+    uploaded_files = st.file_uploader("Choose a file", accept_multiple_files=True)
+    if uploaded_files is not None:
+        for uploaded_file in uploaded_files:
+            bytes_data = uploaded_file.read()
+            if st.button('Upload File'):
+                if uploaded_file is None:
+                    st.write('No File Selected')
                 else:
-                    st.write('File not uploaded: ', key_path, ' already exists')
+                    #st.write('Uploading File')
+                    s3 = boto3.resource('s3')
+                    key_path = option + '/' + uploaded_file.name
+                    if key_path not in files:
+                        s3.Bucket('bfs-chat').put_object(Key=key_path, Body=bytes_data)
+                        st.write(key_path, ' Uploaded')
+                    else:
+                        st.write('File not uploaded: ', key_path, ' already exists')
 else:
     new_collection_form = st.form("New Collection", clear_on_submit = True)
     new_collection = new_collection_form.text_input('Collection Name')
