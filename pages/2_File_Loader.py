@@ -22,9 +22,9 @@ option = st.selectbox(
 if option != '<Create New Collection>':
     uploaded_files = st.file_uploader("Choose a file", accept_multiple_files=True)
     if uploaded_files is not None:
-        for uploaded_file in uploaded_files:
-            bytes_data = uploaded_file.read()
-            if st.button('Upload File'):
+        if st.button('Upload File'):
+            for uploaded_file in uploaded_files:
+                bytes_data = uploaded_file.read()
                 if uploaded_file is None:
                     st.write('No File Selected')
                 else:
