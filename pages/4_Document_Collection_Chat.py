@@ -48,7 +48,7 @@ query_data.template = st.sidebar.text_area('Prompt Template', value = default_te
 #   st.session_state.messages = []
 # st.sidebar.button('Reset Chat', on_click=reset_conversation)
 
-chain = chain_options[model](collection, llm, temperature, QA_PROMPT) #, template)
+chain = chain_options[model](collection, llm, temperature) #, template)
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
