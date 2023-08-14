@@ -7,11 +7,6 @@ import query_data
 import doc_chat_common
 import os
 
-template = query_data.template
-st.write(query_data.template)
-query_data.template = 'Hello World'
-st.write(query_data.template)
-
 doc_chat_common.set_api_key()
 
 collection = st.sidebar.selectbox(
@@ -31,8 +26,8 @@ model = st.sidebar.selectbox(
     list(chain_options.keys())
 )
 
-template = st.sidebar.text_area('Prompt Template', value = template, height=20)
-
+template = st.sidebar.text_area('Prompt Template', value = query_data.template, height=20)
+query_data.template = template
 # def reset_conversation():
 #   st.session_state.conversation = None
 #   st.session_state.chat_history = None
