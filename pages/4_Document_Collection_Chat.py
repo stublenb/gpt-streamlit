@@ -1,4 +1,5 @@
 import openai
+from langchain.prompts.prompt import PromptTemplate
 import streamlit as st
 import boto3
 import json
@@ -8,7 +9,7 @@ import doc_chat_common
 import os
 
 
-default_template = """You are an AI assistant for answering questions about the software license agreements.
+template = """You are an AI assistant for answering questions about the software license agreements.
 You are given the following extracted parts of a long document and a question. Provide a conversational answer.
 If you don't know the answer, just say "Hmm, I'm not sure." Don't try to make up an answer.
 If the question is not about the contracts or license agreements, politely inform them that you are tuned to only answer questions about the contracts or license agreements that are loaded into the database.
@@ -38,7 +39,10 @@ model = st.sidebar.selectbox(
     list(chain_options.keys())
 )
 
-query_data.template = st.sidebar.text_area('Prompt Template', value = default_template , height=20)
+template = st.sidebar.text_area('Prompt Template', value = default_template , height=20)
+QA_PROMPT = PromptTemplate(template=template, input_variables=[
+                           "question", "context"])
+
 #query_data.template = template
 
 # def reset_conversation():
@@ -47,7 +51,7 @@ query_data.template = st.sidebar.text_area('Prompt Template', value = default_te
 #   st.session_state.messages = []
 # st.sidebar.button('Reset Chat', on_click=reset_conversation)
 
-chain = chain_options[model](collection, llm, temperature) #, template)
+chain = chain_options[model](collection, llm, temperature, QA_PROMPT) #, template)
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
