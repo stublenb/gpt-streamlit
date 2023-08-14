@@ -27,7 +27,7 @@ model = st.sidebar.selectbox(
 )
 
 template = st.sidebar.text_area('Prompt Template', value = query_data.template, height=20)
-query_data.template = template
+#query_data.template = template
 
 # def reset_conversation():
 #   st.session_state.conversation = None
