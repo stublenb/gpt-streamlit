@@ -19,20 +19,20 @@ Follow Up Input: {question}
 Standalone question:"""
 CONDENSE_QUESTION_PROMPT = PromptTemplate.from_template(_template)
 
-# template = """You are an AI assistant for answering questions about the software license agreements.
-# You are given the following extracted parts of a long document and a question. Provide a conversational answer.
-# If you don't know the answer, just say "Hmm, I'm not sure." Don't try to make up an answer.
-# If the question is not about the contracts or license agreements, politely inform them that you are tuned to only answer questions about the contracts or license agreements that are loaded into the database.
-# Lastly, answer the question as if you were a lawyer.
-# Question: {question}
-# =========
-# {context}
-# =========
-# Answer in Markdown:"""
-#
-#
-# QA_PROMPT = PromptTemplate(template=template, input_variables=[
-#                            "question", "context"])
+template = """You are an AI assistant for answering questions about the software license agreements.
+You are given the following extracted parts of a long document and a question. Provide a conversational answer.
+If you don't know the answer, just say "Hmm, I'm not sure." Don't try to make up an answer.
+If the question is not about the contracts or license agreements, politely inform them that you are tuned to only answer questions about the contracts or license agreements that are loaded into the database.
+Lastly, answer the question as if you were a lawyer.
+Question: {question}
+=========
+{context}
+=========
+Answer in Markdown:"""
+
+
+QA_PROMPT = PromptTemplate(template=template, input_variables=[
+                           "question", "context"])
 
 pg = get_secret('postgres-vector', 'us-east-1')
 
@@ -49,7 +49,7 @@ def load_retriever(collection):
     return retriever
 
 
-def get_basic_qa_chain(collection, llm, temperature, QA_PROMPT):
+def get_basic_qa_chain(collection, llm, temperature):
     llm = ChatOpenAI(model_name=llm, temperature=temperature)
     retriever = load_retriever(collection)
     memory = ConversationBufferMemory(
@@ -61,7 +61,7 @@ def get_basic_qa_chain(collection, llm, temperature, QA_PROMPT):
     return model
 
 
-def get_custom_prompt_qa_chain(collection):
+def get_custom_prompt_qa_chain(collection, llm, temperature):
     llm = ChatOpenAI(model_name=llm, temperature=temperature)
     retriever = load_retriever(collection)
     memory = ConversationBufferMemory(
@@ -74,7 +74,7 @@ def get_custom_prompt_qa_chain(collection):
     return model
 
 
-def get_condense_prompt_qa_chain(collection):
+def get_condense_prompt_qa_chain(collection, llm, temperature):
     llm = ChatOpenAI(model_name=llm, temperature=temperature)
     retriever = load_retriever(collection)
     memory = ConversationBufferMemory(
@@ -88,7 +88,7 @@ def get_condense_prompt_qa_chain(collection):
     return model
 
 
-def get_qa_with_sources_chain(collection):
+def get_qa_with_sources_chain(collection, llm, temperature):
     llm = ChatOpenAI(model_name=llm, temperature=temperature)
     retriever = load_retriever(collection)
     history = []

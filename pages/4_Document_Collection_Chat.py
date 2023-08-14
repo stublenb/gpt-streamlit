@@ -1,5 +1,4 @@
 import openai
-from langchain.prompts.prompt import PromptTemplate
 import streamlit as st
 import boto3
 import json
@@ -39,9 +38,7 @@ model = st.sidebar.selectbox(
     list(chain_options.keys())
 )
 
-template = st.sidebar.text_area('Prompt Template', value = default_template , height=20)
-QA_PROMPT = PromptTemplate(template=template, input_variables=[
-                           "question", "context"])
+query_data.template = st.sidebar.text_area('Prompt Template', value = default_template , height=20)
 
 #query_data.template = template
 
