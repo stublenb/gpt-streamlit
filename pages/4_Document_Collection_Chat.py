@@ -3,10 +3,11 @@ import streamlit as st
 import boto3
 import json
 from query_data import chain_options
-from query_data import template
+from query_data
 import doc_chat_common
 import os
 
+template = query_data.template
 st.write(query_data.template)
 query_data.template = 'Hello World'
 st.write(query_data.template)
