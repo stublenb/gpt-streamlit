@@ -7,6 +7,10 @@ from query_data import template
 import doc_chat_common
 import os
 
+st.write(query_data.template)
+query_data.template = 'Hello World'
+st.write(query_data.template)
+
 doc_chat_common.set_api_key()
 
 collection = st.sidebar.selectbox(
