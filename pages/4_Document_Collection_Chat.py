@@ -38,7 +38,7 @@ model = st.sidebar.selectbox(
     list(chain_options.keys())
 )
 
-query_data.template = st.sidebar.text_area('Prompt Template', value = default_template , height=20)
+# query_data.template = st.sidebar.text_area('Prompt Template', value = default_template , height=20)
 
 #query_data.template = template
 
